@@ -14,9 +14,9 @@ APP.HTML
         </div>
       <br>
         <div class="form-group">
-          <label for="money">Mobile number</label>
-          <input type="text" class="form-control" id="money" formControlName="money">
-          <small style="color:red" *ngIf="money.invalid && money.touched">*MOBILE NUMBER MINIMUM 10 DIGITS IS REQUIRED</small> 
+          <label for="mobilenumber">Mobile number</label>
+          <input type="text" class="form-control" id="mobilenumber" formControlName="mobilenumber">
+          <small style="color:red" *ngIf="mobilenumber.invalid && mobilenumber.touched">*MOBILE NUMBER MINIMUM 10 DIGITS IS REQUIRED</small> 
         </div>
       <br>
             
@@ -55,19 +55,19 @@ export class AppComponent {
   constructor() { 
     this.aform=new FormGroup({
     accnum:new FormControl("",[Validators.required,Validators.minLength(12)]),
-    money:new FormControl("",[Validators.required,Validators.minLength(10)])
+    mobilenumber:new FormControl("",[Validators.required,Validators.minLength(10)])
   });
   
   }
   get accnum(){
     return this.aform.get('accnum');
   }
-  get money(){
-    return this.aform.get('money');
+  get mobilenumber(){
+    return this.aform.get('mobilenumber');
   }
   login(){
     console.log(this.aform.value.accnum)
-    console.log(this.aform.value.money)
+    console.log(this.aform.value.mobilenumber)
 
   }
 }
