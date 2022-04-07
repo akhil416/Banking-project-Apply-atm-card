@@ -1,0 +1,105 @@
+APP.HTML
+
+<div class="container">
+  <div class="panel panel-primary" >
+    <h2 style="text-align: center;background-color:ghostwhite;color:black;">Apply your card here</h2>
+    
+    <div class="panel-body">
+      <form [formGroup]="aform" (ngSubmit)="login()">
+  
+        <div class="form-group">
+          <label for="accnum">AccountNumber</label>
+          <input type="text" class="form-control" id="accnum" formControlName="accnum">
+          <small style="color:red" *ngIf="accnum.invalid && accnum.touched">*ACCOUNT NUMBER MINIMUM 12 DIGITS ARE REQUIRED</small>
+        </div>
+      <br>
+        <div class="form-group">
+          <label for="money">Mobile number</label>
+          <input type="text" class="form-control" id="money" formControlName="money">
+          <small style="color:red" *ngIf="money.invalid && money.touched">*MOBILE NUMBER MINIMUM 10 DIGITS IS REQUIRED</small> 
+        </div>
+      <br>
+            
+     <div class="text-center">
+        <button class="btn btn-primary" [disabled]="aform.invalid">Apply</button></div>
+      
+      </form>
+
+    </div>
+    <br/>
+    <div class="panel-footer">
+        <div class="alert alert-primary" role="alert">
+            
+          </div>
+           
+    </div>
+  </div>
+</div>
+<hr/>
+
+APP.COMPONENT.TS
+
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, MinLengthValidator, Validators } from '@angular/forms';
+
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'APPLY YOUR CARD HERE';
+  aform:FormGroup;
+
+  constructor() { 
+    this.aform=new FormGroup({
+    accnum:new FormControl("",[Validators.required,Validators.minLength(12)]),
+    money:new FormControl("",[Validators.required,Validators.minLength(10)])
+  });
+  
+  }
+  get accnum(){
+    return this.aform.get('accnum');
+  }
+  get money(){
+    return this.aform.get('money');
+  }
+  login(){
+    console.log(this.aform.value.accnum)
+    console.log(this.aform.value.money)
+
+  }
+}
+
+APP.MODULE.TS
+
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CreateComponent } from './create/create.component';
+import { DebitComponent } from './debit/debit.component';
+import { AccountComponent } from './account/account.component';
+import { HomeComponent } from './home/home.component';
+
+
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    CreateComponent,
+    DebitComponent,
+    AccountComponent,
+    HomeComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,FormsModule,ReactiveFormsModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
