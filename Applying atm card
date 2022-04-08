@@ -7,10 +7,10 @@ APP.HTML
     <div class="panel-body">
       <form [formGroup]="aform" (ngSubmit)="login()">
   
-        <div class="form-group">
-          <label for="accnum">AccountNumber</label>
-          <input type="text" class="form-control" id="accnum" formControlName="accnum">
-          <small style="color:red" *ngIf="accnum.invalid && accnum.touched">*ACCOUNT NUMBER MINIMUM 12 DIGITS ARE REQUIRED</small>
+         <div class="form-group">
+          <label for="Accountnumber">AccountNumber</label>
+          <input type="text" class="form-control" id="Accountnumber" formControlName="Accountnumber">
+          <small style="color:red" *ngIf="Accountnumber.invalid && Accountnumber.touched">*ACCOUNT NUMBER MINIMUM 12 DIGITS ARE REQUIRED</small>
         </div>
       <br>
         <div class="form-group">
