@@ -1,41 +1,103 @@
 APP.HTML
 
+<div class="header"><h2><img src="https://sbi.co.in/o/SBI-Theme/images/custom/logo.png"></h2></div>
+<hr/>
 <div class="container">
   <div class="panel panel-primary" >
     <h2 style="text-align: center;background-color:ghostwhite;color:black;">Apply your card here</h2>
-    
+    <br/>
     <div class="panel-body">
       <form [formGroup]="aform" (ngSubmit)="login()">
+        <div class="form-group">
+          <label for="Nameonyourcard"><b>Name on your card</b></label>
+          <input type="text" class="form-control" id="Nameonyourcard" formControlName="Nameonyourcard">
+          <small style="color:red" *ngIf="Nameonyourcard.invalid && Nameonyourcard.touched">*NAME IS REQUIRED(no numericals are allowed)</small>
+        </div>
+        <br>
   
-         <div class="form-group">
-          <label for="Accountnumber">AccountNumber</label>
+        <div class="form-group">
+          <label for="Accountnumber"><b>Account Number</b></label>
           <input type="text" class="form-control" id="Accountnumber" formControlName="Accountnumber">
           <small style="color:red" *ngIf="Accountnumber.invalid && Accountnumber.touched">*ACCOUNT NUMBER MINIMUM 12 DIGITS ARE REQUIRED</small>
         </div>
-      <br>
+       <br>
         <div class="form-group">
-          <label for="mobilenumber">Mobile number</label>
+          <label for="mobilenumber"><b>Mobile Number</b></label>
           <input type="text" class="form-control" id="mobilenumber" formControlName="mobilenumber">
           <small style="color:red" *ngIf="mobilenumber.invalid && mobilenumber.touched">*MOBILE NUMBER MINIMUM 10 DIGITS IS REQUIRED</small> 
         </div>
-      <br>
+       <br>
             
-     <div class="text-center">
+       <div class="text-center">
         <button class="btn btn-primary" [disabled]="aform.invalid">Apply</button></div>
       
       </form>
 
     </div>
     <br/>
-    <div class="panel-footer">
-        <div class="alert alert-primary" role="alert">
-            
-          </div>
-           
-    </div>
+    
+  </div>
+  <div class="secondary-panel">
+    <img src="https://sbi.co.in/documents/16012/82139/SBI+MY+CARD+INTERNATIONAL+DEBID+CARD.JPG.jpg/bf229c4d-95aa-40e1-ed01-c7df0ae95413?t=1560750459340">
+    <h4>Use of SBI My Card International Debit Card</h4>
+    <ul>
+      <li class="cont-text-li">For shopping at over 6 Lakh merchant outlets in India, and over 30 million worldwide.</li>
+      <li class="cont-text-li">For booking movie tickets, bill payments, travel and other online purchases and payments over the internet.</li>
+      <li class="cont-text-li">For withdrawing cash from SBI ATMs or other ATMs in India and worldwide (ATMs with MasterCard/Maestro/Visa logo).</li>
+    </ul>
   </div>
 </div>
-<hr/>
+
+
+<div class="footer">
+  <hr/>
+<footer>
+  <p style="text-align: center;">STATE BANK OF INDIA</p>
+  <P style="text-align: center;">DEVELOPED BY GROUP-A</P>
+</footer>
+</div>
+
+
+APP.COMPONENT.CSS
+
+div.container{
+   width:100%
+
+}
+
+
+div.panel.panel-primary{
+    
+    display:inline-block;
+    width:50%;
+    padding-right:30px;
+    padding-top:2%;
+    }
+    
+    div.secondary-panel{
+        display:inline-block;
+        width:50%;
+        position:absolute;
+        padding-left:30px;
+        padding-top:2%;
+    }
+
+div.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #280071;
+    color:#fff;
+}
+
+div.header h2{ 
+    background-color: #fff;
+    color:#fff;
+    text-align: center;
+}
+    
+
+
 
 APP.COMPONENT.TS
 
@@ -54,19 +116,25 @@ export class AppComponent {
 
   constructor() { 
     this.aform=new FormGroup({
-    accnum:new FormControl("",[Validators.required,Validators.minLength(12)]),
-    mobilenumber:new FormControl("",[Validators.required,Validators.minLength(10)])
+    Accountnumber:new FormControl("",[Validators.required,Validators.pattern('[0-9]+'),Validators.minLength(12)]),
+    mobilenumber:new FormControl("",[Validators.required,Validators.pattern('[0-9]+'),Validators.minLength(10)]),
+    Nameonyourcard:new FormControl("",[Validators.required,Validators.pattern("[a-zA-Z ]*")])
   });
   
   }
-  get accnum(){
-    return this.aform.get('accnum');
+
+  get Nameonyourcard(){
+    return this.aform.get('Nameonyourcard');
+  }
+  get Accountnumber(){
+    return this.aform.get('Accountnumber');
   }
   get mobilenumber(){
     return this.aform.get('mobilenumber');
   }
   login(){
-    console.log(this.aform.value.accnum)
+    console.log(this.aform.value.Nameonyourcard)
+    console.log(this.aform.value.Accountnumber)
     console.log(this.aform.value.mobilenumber)
 
   }
@@ -77,23 +145,16 @@ APP.MODULE.TS
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CreateComponent } from './create/create.component';
-import { DebitComponent } from './debit/debit.component';
-import { AccountComponent } from './account/account.component';
-import { HomeComponent } from './home/home.component';
+
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreateComponent,
-    DebitComponent,
-    AccountComponent,
-    HomeComponent
   ],
   imports: [
     BrowserModule,
